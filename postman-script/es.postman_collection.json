@@ -1,0 +1,169 @@
+{
+	"info": {
+		"_postman_id": "3b394577-eb19-49e3-a33f-bcbdf9bc9b74",
+		"name": "es",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "show index",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create index",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create a mapping",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"properties\": {\r\n        \"content\": {\r\n            \"type\": \"text\",\r\n            \"analyzer\": \"ik_max_word\",\r\n            \"search_analyzer\": \"ik_max_word\"\r\n        }\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "http://192.168.16.129:9200/index/fulltext/_mapping",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"16",
+						"129"
+					],
+					"port": "9200",
+					"path": [
+						"index",
+						"fulltext",
+						"_mapping"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "show index message",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "bulk",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"content\":\"美国留给伊拉克的是个烂摊子吗\"}\n{\"content\":\"公安部：各地校车将享最高路权\"}\n{\"content\":\"中韩渔警冲突调查：韩警平均每天扣1艘中国渔船\"}\n{\"content\":\"中国驻洛杉矶领事馆遭亚裔男子枪击 嫌犯已自首\"}"
+				},
+				"url": {
+					"raw": "http://192.168.16.129:9200/index/fulltext/_bulk",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"16",
+						"129"
+					],
+					"port": "9200",
+					"path": [
+						"index",
+						"fulltext",
+						"_bulk"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "search",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "searchIndex",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "empty search",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		}
+	]
+}
