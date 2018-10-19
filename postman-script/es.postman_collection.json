@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "3b394577-eb19-49e3-a33f-bcbdf9bc9b74",
+		"_postman_id": "3fa1ce44-31f0-43f1-8cee-757860c728ba",
 		"name": "es",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -15,7 +15,19 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": ""
+					"raw": "http://172.16.246.128:9200/_cat/indices",
+					"protocol": "http",
+					"host": [
+						"172",
+						"16",
+						"246",
+						"128"
+					],
+					"port": "9200",
+					"path": [
+						"_cat",
+						"indices"
+					]
 				}
 			},
 			"response": []
@@ -23,14 +35,26 @@
 		{
 			"name": "create index",
 			"request": {
-				"method": "GET",
+				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
 					"raw": ""
 				},
 				"url": {
-					"raw": ""
+					"raw": "http://172.16.246.128:9200/index/",
+					"protocol": "http",
+					"host": [
+						"172",
+						"16",
+						"246",
+						"128"
+					],
+					"port": "9200",
+					"path": [
+						"index",
+						""
+					]
 				}
 			},
 			"response": []
@@ -42,9 +66,7 @@
 				"header": [
 					{
 						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
+						"value": "application/json"
 					}
 				],
 				"body": {
@@ -52,13 +74,13 @@
 					"raw": "{\r\n    \"properties\": {\r\n        \"content\": {\r\n            \"type\": \"text\",\r\n            \"analyzer\": \"ik_max_word\",\r\n            \"search_analyzer\": \"ik_max_word\"\r\n        }\r\n    }\r\n}"
 				},
 				"url": {
-					"raw": "http://192.168.16.129:9200/index/fulltext/_mapping",
+					"raw": "http://172.16.246.128:9200/index/fulltext/_mapping",
 					"protocol": "http",
 					"host": [
-						"192",
-						"168",
+						"172",
 						"16",
-						"129"
+						"246",
+						"128"
 					],
 					"port": "9200",
 					"path": [
@@ -80,7 +102,19 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": ""
+					"raw": "http://172.16.246.128:9200/index/",
+					"protocol": "http",
+					"host": [
+						"172",
+						"16",
+						"246",
+						"128"
+					],
+					"port": "9200",
+					"path": [
+						"index",
+						""
+					]
 				}
 			},
 			"response": []
@@ -92,23 +126,21 @@
 				"header": [
 					{
 						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
+						"value": "application/json"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"content\":\"美国留给伊拉克的是个烂摊子吗\"}\n{\"content\":\"公安部：各地校车将享最高路权\"}\n{\"content\":\"中韩渔警冲突调查：韩警平均每天扣1艘中国渔船\"}\n{\"content\":\"中国驻洛杉矶领事馆遭亚裔男子枪击 嫌犯已自首\"}"
+					"raw": "{\"index\":{\"_index\": \"index\",\"_type\": \"fulltext\",\"_id\":1}}\r\n{\"content\":\"美国留给伊拉克的是个烂摊子吗\"}\r\n{\"index\":{\"_index\": \"index\",\"_type\": \"fulltext\",\"_id\":2}}\r\n{\"content\":\"公安部：各地校车将享最高路权\"}\r\n{\"index\":{\"_index\": \"index\",\"_type\": \"fulltext\",\"_id\":3}}\r\n{\"content\":\"中韩渔警冲突调查：韩警平均每天扣1艘中国渔船\"}\r\n{\"index\":{\"_index\": \"index\",\"_type\": \"fulltext\",\"_id\":4}}\r\n{\"content\":\"中国驻洛杉矶领事馆遭亚裔男子枪击 嫌犯已自首\"}\r\n"
 				},
 				"url": {
-					"raw": "http://192.168.16.129:9200/index/fulltext/_bulk",
+					"raw": "http://172.16.246.128:9200/index/fulltext/_bulk",
 					"protocol": "http",
 					"host": [
-						"192",
-						"168",
+						"172",
 						"16",
-						"129"
+						"246",
+						"128"
 					],
 					"port": "9200",
 					"path": [
@@ -123,29 +155,32 @@
 		{
 			"name": "search",
 			"request": {
-				"method": "GET",
-				"header": [],
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": ""
+					"raw": "{\r\n    \"query\" : { \"match\" : { \"content\" : \"中国\" }},\r\n    \"highlight\" : {\r\n        \"pre_tags\" : [\"<tag1>\", \"<tag2>\"],\r\n        \"post_tags\" : [\"</tag1>\", \"</tag2>\"],\r\n        \"fields\" : {\r\n            \"content\" : {}\r\n        }\r\n    }\r\n}"
 				},
 				"url": {
-					"raw": ""
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "searchIndex",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": ""
+					"raw": "http://172.16.246.128:9200/index/fulltext/_search",
+					"protocol": "http",
+					"host": [
+						"172",
+						"16",
+						"246",
+						"128"
+					],
+					"port": "9200",
+					"path": [
+						"index",
+						"fulltext",
+						"_search"
+					]
 				}
 			},
 			"response": []
@@ -160,7 +195,20 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": ""
+					"raw": "http://172.16.246.128:9200/index/fulltext/_search",
+					"protocol": "http",
+					"host": [
+						"172",
+						"16",
+						"246",
+						"128"
+					],
+					"port": "9200",
+					"path": [
+						"index",
+						"fulltext",
+						"_search"
+					]
 				}
 			},
 			"response": []
